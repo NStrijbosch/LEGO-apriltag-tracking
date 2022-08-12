@@ -8,6 +8,7 @@ from dt_apriltags import Detector
 visualization = True
 
 imagepath = "tmp/img.jpg"
+datapath = "tmp/data.txt"
 
 at_detector = Detector(
     families="tag16h5",
@@ -36,8 +37,33 @@ if visualization:
 
 color_img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
+f = open(datapath, "w")
+
 for tag in tags:
     if tag.decision_margin > 20:
+        f.write("tag_id:")
+        f.write(str(tag.tag_id))
+        f.write("\n")
+        f.write("ceter:")
+        f.write(str(tag.center[0]))
+        f.write(",")
+        f.write(str(tag.center[1]))
+        f.write("\n")
+        f.write("corners:")
+        f.write("\n")
+        for i in range(4):
+            f.write(str(tag.corners[i, 0]))
+            f.write(",")
+            f.write(str(tag.corners[i, 1]))
+            f.write("\n")
+        f.write("homography:")
+        f.write("\n")
+        for i in range(3):
+            for j in range(3):
+                f.write(str(tag.homography[i, j]))
+                f.write(",")
+            f.write("\n")
+
         for idx in range(len(tag.corners)):
             cv2.line(
                 color_img,
