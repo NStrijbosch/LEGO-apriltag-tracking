@@ -7,7 +7,8 @@ from dt_apriltags import Detector
 
 visualization = True
 
-imagepath = "tmp/img.jpg"
+originalimagepath = "tmp/orignal_img.jpg"
+processedimagepath = "tmp/processed_img.jpg"
 datapath = "tmp/data.txt"
 
 at_detector = Detector(
@@ -25,9 +26,9 @@ camera.rotation = 180
 
 time.sleep(2)  # camera warm-up time
 
-camera.capture(imagepath)
+camera.capture(originalimagepath)
 
-img = cv2.imread(imagepath, cv2.IMREAD_GRAYSCALE)
+img = cv2.imread(originalimagepath, cv2.IMREAD_GRAYSCALE)
 
 tags = at_detector.detect(img)
 print(tags)
@@ -90,3 +91,6 @@ if visualization:
     k = cv2.waitKey(0)
     if k == 27:  # wait for ESC key to exit
         cv2.destroyAllWindows()
+        
+        
+cv2.imwrite(processedimagepath,color_img)
