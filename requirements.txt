@@ -1,6 +1,6 @@
 black==22.6.0
 picamera==1.13
 opencv-python==4.3.0.38
-numpy==1.21.6
+numpy==1.22.0
 dt-apriltags==3.1.7
 matplotlib==3.5.3
